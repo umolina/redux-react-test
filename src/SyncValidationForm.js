@@ -1,6 +1,9 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import styled from "styled-components";
+import { Flex, Box } from 'grid-styled'
+import { BrandButton } from './buttons'
+import { TextInput } from './inputs'
 
 const validate = values => {
     const errors = {}
@@ -53,13 +56,25 @@ const SyncValidationForm = (props) => {
     const { handleSubmit, pristine, reset, submitting, className } = props
     return (
         <form onSubmit={handleSubmit} className={className}>
-            <Field name="username" type="text" component={textField} label="Username"/>
-            <Field name="email" type="email" component={emailField} label="Email"/>
-            <Field name="age" type="number" component={textField} label="Age"/>
-            <div>
-                <button type="submit" disabled={submitting}>Submit</button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-            </div>
+            <Flex wrap className='bold'>
+                <Box width={1/2} p={1}>
+                    <Field name="email" type="email" component={TextInput} label="Email"/>
+                </Box>
+                <Box width={1/2} p={1}>
+                    <Field name="first_name" type="text" component={TextInput} label="First name"/>
+                </Box>
+                <Box width={1/2} p={1}>
+                    <Field name="phone" type="text" component={TextInput} label="Phone number"/>
+                </Box>
+                <Box width={1/2} p={1}>
+                    <Field name="password" type="password" component={TextInput} label="Password"/>
+                </Box>
+
+                <Box width={1} p={1}>
+                    <BrandButton type="submit" disabled={submitting}>Start my free trial</BrandButton>
+                </Box>
+
+            </Flex>
         </form>
     )
 }

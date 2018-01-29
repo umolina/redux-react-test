@@ -5,7 +5,7 @@ import {createStore} from 'redux'
 import App from './App';
 import rootReducer from './reducers'
 import {ThemeProvider} from 'styled-components'
-import theme from './themes/hfe'
+import theme from './themes/lhs'
 
 let store = createStore(
     rootReducer,
