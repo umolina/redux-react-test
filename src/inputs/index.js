@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { Field, reduxForm } from 'redux-form'
+import IntlTelInput from 'react-intl-tel-input';
 
 const FormInput = styled.input`
     font-size: 1rem;

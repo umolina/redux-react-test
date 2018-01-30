@@ -1,0 +1,36 @@
+
+.intl-tel-input {
+    position: relative;
+    display: inline-block;
+    font-size: 1rem;
+    color: #333333;
+    width: 100%;
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+    border: 0.1rem solid;
+    border-color: #bbbbbb;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #fff;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.form-control {
+    position: relative;
+    display: inline-block;
+    font-size: 1rem;
+    color: #333333;
+    width: 100%;
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+    border: none;
+    outline: none;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #fff;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}

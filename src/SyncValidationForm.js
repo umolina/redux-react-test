@@ -3,7 +3,11 @@ import { Field, reduxForm } from 'redux-form'
 import styled from "styled-components";
 import { Flex, Box } from 'grid-styled'
 import { BrandButton } from './buttons'
-import { TextInput } from './inputs'
+import { TextInput, PhoneNumberInput } from './inputs'
+import IntlTelInput from 'react-intl-tel-input';
+import '../node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import '../node_modules/react-intl-tel-input/dist/main.css';
+import './inputs/phone.css';
 
 const validate = values => {
     const errors = {}
@@ -64,7 +68,11 @@ const SyncValidationForm = (props) => {
                     <Field name="first_name" type="text" component={TextInput} label="First name"/>
                 </Box>
                 <Box width={1/2} p={1}>
-                    <Field name="phone" type="text" component={TextInput} label="Phone number"/>
+                    <IntlTelInput
+                        preferredCountries={['es']}
+                        css={ ['intl-tel-input', 'form-control'] }
+                        utilsScript={ 'libphonenumber.js' }
+                    />
                 </Box>
                 <Box width={1/2} p={1}>
                     <Field name="password" type="password" component={TextInput} label="Password"/>
