@@ -72,6 +72,8 @@ const SyncValidationForm = (props) => {
                         preferredCountries={['es']}
                         css={ ['intl-tel-input', 'form-control'] }
                         utilsScript={ 'libphonenumber.js' }
+                        autoComplete={ 'tel' }
+                        fieldName={'tel'}
                     />
                 </Box>
                 <Box width={1/2} p={1}>
