@@ -20,7 +20,7 @@ const FormInput = styled.input`
     box-sizing: border-box;         /* Opera/IE 8+ */
 `
 
-const FormLabel = styled.label`
+export const FormLabel = styled.label`
     color: #999999;
     font-size: 0.8125rem;
     position: absolute;
