@@ -24,14 +24,16 @@ const validate = values => {
         errors.email = 'Invalid email address'
     }
 
+    console.log(values)
+
     return errors
 }
 
-let textField = ({ input, label, type, meta: { touched, error, warning }, className }) => (
+let textField = ({ input, label, type, autoComplete, meta: { touched, error, warning }, className }) => (
     <div>
         <label>{label}</label>
         <div>
-            <input {...input} placeholder={label} type={type} className={className}/>
+            <input {...input} placeholder={label} type={type} className={className} autoComplete={autoComplete} />
             {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
         </div>
     </div>
@@ -55,6 +57,42 @@ emailField = styled(emailField)`
     background-color: blue;
 `
 
+const loadJSONP = (url, callback) => {
+    const ref = window.document.getElementsByTagName('script')[0];
+    const script = window.document.createElement('script');
+    script.src = `${url + (url.indexOf('?') + 1 ? '&' : '?')}callback=${callback}`;
+    ref.parentNode.insertBefore(script, ref);
+    script.onload = () => {
+        script.remove();
+    };
+};
+
+const lookup = (callback) => {
+    loadJSONP('http://ipinfo.io', 'sendBack');
+    window.sendBack = (resp) => {
+        const countryCode = (resp && resp.country) ? resp.country : '';
+        callback(countryCode);
+    }
+};
+
+const phoneHandler = (status, value, countryData, number, id) => {
+    console.log(status, value, countryData, number, id);
+};
+
+
+const renderPhoneNumber = ({ input: { onChange, value }, label }) => (
+    <IntlTelInput
+        defaultCountry={ 'auto' }
+        geoIpLookup={ lookup }
+        onPhoneNumberChange={ onChange }
+        onPhoneNumberBlur={ onChange }
+        css={ ['intl-tel-input', 'form-control'] }
+        utilsScript={ 'libphonenumber.js' }
+        autoComplete={ 'tel' }
+        fieldName={'tel'}
+        label = {label}
+    />
+)
 
 const SyncValidationForm = (props) => {
     const { handleSubmit, pristine, reset, submitting, className } = props
@@ -65,19 +103,13 @@ const SyncValidationForm = (props) => {
                     <Field name="email" type="email" component={TextInput} label="Email"/>
                 </Box>
                 <Box width={1/2} p={1}>
-                    <Field name="first_name" type="text" component={TextInput} label="First name"/>
+                    <Field name="first_name" type="text" component={TextInput} label="First name" />
                 </Box>
                 <Box width={1/2} p={1}>
-                    <IntlTelInput
-                        preferredCountries={['es']}
-                        css={ ['intl-tel-input', 'form-control'] }
-                        utilsScript={ 'libphonenumber.js' }
-                        autoComplete={ 'tel' }
-                        fieldName={'tel'}
-                    />
+                    <Field name="tel" type="tel" component={renderPhoneNumber} label="Phone number"/>
                 </Box>
                 <Box width={1/2} p={1}>
-                    <Field name="password" type="password" component={TextInput} label="Password"/>
+                    <Field name="password" type="password" component={TextInput} label="Password" autoComplete='new-password'/>
                 </Box>
 
                 <Box width={1} p={1}>

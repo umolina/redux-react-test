@@ -29,10 +29,10 @@ const FormLabel = styled.label`
     z-index: 1;
 `
 
-let TextInputF = ({ input, label, type, meta: { touched, error, warning }, placeholder, className  }) => {
+let TextInputF = ({ input, label, type, autoComplete, meta: { touched, error, warning }, placeholder, className  }) => {
     return (
         <div className={className}>
-            <FormInput {...input} placeholder={placeholder} type={type} />
+            <FormInput {...input} placeholder={placeholder} type={type} autoComplete={autoComplete}/>
             <FormLabel>{label} {touched && ((error && <span>{error}</span>))}</FormLabel>
         </div>
     )
