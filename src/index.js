@@ -50,6 +50,10 @@ const translationData = {
             'Max length exceeded',
             'FR - Max length exceeded',
         ],
+        phone: [
+            'Invalid number',
+            'FR - Invalid number',
+        ],
     }
 };
 

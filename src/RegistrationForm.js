@@ -1,12 +1,12 @@
 import React from 'react'
-import {Field, reduxForm, SubmissionError, Form, propTypes} from 'redux-form'
+import {Field, reduxForm, SubmissionError, Form} from 'redux-form'
 import { connect } from 'react-redux'
 import styled from "styled-components"
 import {Flex, Box} from 'grid-styled'
 import { getTranslate, getActiveLanguage } from 'react-localize-redux'
 import {BrandButton} from './buttons'
 import {TextInput, PhoneInput} from './inputs'
-import { required, email, length, format, presence } from 'redux-form-validators'
+import { required, email, length, format } from 'redux-form-validators'
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 function submit(values) {
@@ -23,15 +23,8 @@ function submit(values) {
         })
 }
 
-// --- Validation Rules ----
-
-const validPhone = value =>
-    value && (false === value[0]) ?
-        'Valid phone number required' : undefined
-
-
 let RegistrationForm = (props) => {
-    const {handleSubmit, submitting, className, translate, currentLanguage} = props
+    const {handleSubmit, submitting, className, translate} = props
 
     return (
         <Form onSubmit={handleSubmit(submit)} className={className}>
@@ -59,7 +52,7 @@ let RegistrationForm = (props) => {
                            component={PhoneInput} label={ translate('labels.phone_number') }
                            validate={[
                                required({msg: translate('input_errors.required')}),
-                               validPhone
+                               value => value && (false === value[0]) ? translate('input_errors.phone') : undefined
                            ]}
                     />
                 </Box>
