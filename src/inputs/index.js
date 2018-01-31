@@ -66,8 +66,8 @@ const lookup = (callback) => {
 };
 
 let PhoneInputComponent = props => {
-    const {placeholder, input, meta, className, label} = props;
-    const {onBlur, onChange, value} = input;
+    const {input, meta, className, label} = props;
+    const {onBlur, onChange} = input;
     const {error} = meta
 
     let onChangeX = (...args) => {

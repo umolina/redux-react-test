@@ -41,13 +41,11 @@ const validate = values => {
         errors.tel = 'Valid number required'
     }
 
-    console.log(values.tel)
-
     return errors
 }
 
-const SyncValidationForm = (props) => {
-    const {handleSubmit, pristine, reset, submitting, className} = props
+let RegistrationForm = (props) => {
+    const {handleSubmit, submitting, className} = props
     return (
         <form onSubmit={handleSubmit(submit)} className={className}>
             <Flex wrap className='bold'>
@@ -74,7 +72,7 @@ const SyncValidationForm = (props) => {
     )
 }
 
-let StyledSyncValidationForm = styled(SyncValidationForm)`
+RegistrationForm = styled(RegistrationForm)`
     font-weight: bold;
     background-color: pink;
 `
@@ -83,4 +81,4 @@ let StyledSyncValidationForm = styled(SyncValidationForm)`
 export default reduxForm({
     form: 'syncValidation',  // a unique identifier for this form
     validate,                // <--- validation function given to redux-form
-})(StyledSyncValidationForm)
+})(RegistrationForm)
