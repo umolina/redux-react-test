@@ -12,7 +12,6 @@ const Title = styled.h1`
     color: palevioletred;
 `
 
-
 class App extends Component {
     render() {
         return (
