@@ -20,47 +20,60 @@ function submit(values) {
         })
 }
 
+// --- Validation Rules ----
+const required = value => value ? undefined : 'Required'
+
+const minLength = min => value =>
+    value && value.length < min ? `Must be ${min} characters or more` : undefined
+
+const maxLength = max => value =>
+    value && value.length > max ? `Must be ${max} characters or less` : undefined
+
+const maxLength20 = maxLength(20)
+
+const validEmail = value =>
+    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+        'Invalid email address' : undefined
+
+const validPhone = value =>
+    value && (false === value[0]) ?
+        'Valid phone number required' : undefined
 
 
-const validate = values => {
-    const errors = {}
+const validPassword = value =>
+    value && !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/i.test(value) ?
+        'Must contain at least one number and one uppercase and lowercase letter, and at least 6 or more characters' : undefined
 
-    if (!values.first_name) {
-        errors.first_name = 'Required'
-    } else if (values.first_name.length > 15) {
-        errors.first_name = 'Must be 15 characters or less'
-    }
-
-    if (!values.email) {
-        errors.email = 'Required'
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address'
-    }
-
-    if (values.tel && (false === values.tel[0])) {
-        errors.tel = 'Valid number required'
-    }
-
-    return errors
-}
 
 let RegistrationForm = (props) => {
     const {handleSubmit, submitting, className} = props
     return (
         <form onSubmit={handleSubmit(submit)} className={className}>
             <Flex wrap className='bold'>
-                <Box width={1 / 2} p={1}>
-                    <Field name="email" type="email" component={TextInput} label="Email"/>
+                <Box width={1/2} p={1}>
+                    <Field name="email" type="email"
+                           component={TextInput} label="Email"
+                           validate={[required, validEmail]}
+                    />
                 </Box>
-                <Box width={1 / 2} p={1}>
-                    <Field name="first_name" type="text" component={TextInput} label="First name"/>
+                <Box width={1/2} p={1}>
+                    <Field name="first_name" type="text"
+                           component={TextInput} label="First name"
+                           validate={[required, maxLength20]}
+                    />
                 </Box>
-                <Box width={1 / 2} p={1}>
-                    <Field name="tel" type="tel" component={PhoneInput} label="Phone number"/>
+                <Box width={1/2} p={1}>
+                    <Field name="tel" type="tel"
+                           component={PhoneInput} label="Phone number"
+                           validate={[required, validPhone]}
+                    />
                 </Box>
-                <Box width={1 / 2} p={1}>
-                    <Field name="password" type="password" component={TextInput} label="Password"
-                           autoComplete='new-password'/>
+                <Box width={1/2} p={1}>
+                    <Field name="password" type="password"
+                           component={TextInput} label="Password"
+                           autoComplete='new-password'
+                           validate={[required, validPassword, maxLength20]}
+                    />
                 </Box>
 
                 <Box width={1} p={1}>
@@ -80,5 +93,4 @@ RegistrationForm = styled(RegistrationForm)`
 
 export default reduxForm({
     form: 'syncValidation',  // a unique identifier for this form
-    validate,                // <--- validation function given to redux-form
 })(RegistrationForm)
