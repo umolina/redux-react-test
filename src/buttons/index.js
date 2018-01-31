@@ -15,10 +15,7 @@ export const BrandButton = styled.button`
     color: ${props => props.theme.button_text_color};
     border-color: ${props => props.theme.brand_color_main};
     background-color: ${props => props.theme.brand_color_main};
-    padding-top: 1.35rem;
-    padding-bottom: 1.35rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding: 1.35rem 3rem 1.35rem 3rem;
     margin-top: 0px;
     margin-bottom: 0px;
     margin-left: 0px;
