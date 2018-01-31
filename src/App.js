@@ -2,9 +2,11 @@ import React, {Component} from 'react'
 import Counter from './Counter/index'
 import styled from 'styled-components'
 import {ThemeProvider} from 'styled-components'
+import Hide from 'hidden-styled'
 import RegistrationForm from "./RegistrationForm"
 import NavBar from "./NavBar";
 import theme from "./themes/lhs";
+import {BrandButton} from './buttons'
 
 const Title = styled.h1`
     font-size: 1.5em;
@@ -28,7 +30,12 @@ class App extends Component {
                     <Counter/>
                 </ThemeProvider>
                 <Title>Simple Form</Title>
-                <RegistrationForm/>
+                <Hide xs>
+                    <RegistrationForm/>
+                </Hide>
+                <Hide sm md lg>
+                    <BrandButton type="submit">Start my free trial</BrandButton>
+                </Hide>
                 <ul>
                     <li>Registration Form</li>
                 </ul>
